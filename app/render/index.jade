@@ -1,0 +1,10 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8", name="viewport", content="width=device-width, initial-scale=1")
+        title=pageTitle
+    body
+        #app
+        script(type='text/javascript').
+            window.NODE_ENV = '#{coinsEnv}';
+        script(type='text/javascript', src=entryUrl)

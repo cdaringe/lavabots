@@ -1,0 +1,122 @@
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+
+.screen {
+  min-height: 100vh;
+  padding-top: $grid-gutter-width / 2;
+  padding-bottom: $grid-gutter-width / 2;
+}
+.screen__content {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/**
+ * Logo
+ */
+.logo {
+    margin: 0 0 2rem;
+
+    &:before {
+        background: url(../images/logo.png) no-repeat;
+        background-size: contain;
+        content: '';
+        display: inline-block;
+        height: 4rem;
+        margin: 0 .75rem 0 0;
+        width: 4rem;
+        vertical-align: top;
+    }
+
+    abbr[title] {
+        border: none;
+    }
+}
+
+/**
+ * Account
+ *
+ * @todo  Refactor styles into modules
+ */
+.account {
+  background: $gray-lighter;
+
+  .nav-pills {
+    margin: 0 0 2rem;
+  }
+}
+
+
+/**
+ * Navigation
+ */
+.main {
+  position: relative;
+}
+
+.navigation {
+    background: $gray-lighter;
+
+    > nav .glyphicon {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+    @media (min-width: $screen-sm) {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        left: 0;
+        padding: $grid-gutter-width / 2;
+        position: fixed;
+        top: 0;
+        width: 33.33%;
+
+        .logo {
+            margin-bottom: 2rem;
+        }
+        > nav {
+            flex-grow: 1;
+        }
+    }
+}
+
+
+/** File items */
+.file-item {
+    margin: 2rem 0;
+
+    ul {
+        margin-bottom: 0;
+    }
+}
+.file-item__name {
+    margin-top: 0;
+}
+
+/** Consortia */
+.dashboard-consortia > .row > .col-sm-6:nth-child(odd) {
+    clear: both;
+}
+.consortium {
+    min-height: 220px;
+}
+.consortium .btn-toolbar {
+    .glyphicon {
+        margin-right: .5rem;
+    }
+}
+.consortium__tags .label {
+    margin: 0 .5rem .5rem 0;
+}
+
+/** Page header with button */
+.page-header .btn {
+    margin-top: 2.5rem;
+}
+.page-header .btn strong {
+    margin-right: .5rem;
+}
