@@ -1,5 +1,5 @@
 int DOs [8] = { D0, D1, D2, D3, D4, D5, D6, D7 };
-char DOchars [8] = { '0', '0','0','0','0','0','0','0' };
+char DOchars [9] = { '0', '0','0','0','0','0','0', '\0' };
 int myLED = DOs[0];
 int onBoardLED = DOs[7];
 void setup()
@@ -28,9 +28,10 @@ int togglebit(String inpin)
         DOchars[pin] = '1';
         digitalWrite(pin, HIGH);
     }
-    Particle.publish("digital-out-update", DOchars);
+    Particle.publish("digital-out-update", String(DOchars));
     return 1;
 }
+
 
 
 // /* Function prototypes -------------------------------------------------------*/
