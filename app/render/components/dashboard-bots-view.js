@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import BotControlPanel from './bot/control-panel.js';
+import { _ } from 'lodash';
 
 class DashboardBotsView extends React.Component {
     _renderAuthorizing() {
@@ -12,11 +13,19 @@ class DashboardBotsView extends React.Component {
     }
 
     _renderBots(opts) {
-        let { bots, handleCmd } = opts;
+        let { bots, handleCmd, inFlightDOs, refreshBots } = opts;
+        const inFlightDOsByName = _.groupBy(inFlightDOs, 'name');
         return bots.map((bot, ndx) => {
+            const inFlightDOs = inFlightDOsByName[bot.attributes.name] ?
+                _.pluck(inFlightDOsByName[bot.attributes.name], 'DO') :
+                [];
             return (
                 <div key={'bot-' + ndx}>
-                    <BotControlPanel bot={bot} {...opts} />
+                    <BotControlPanel
+                        bot={bot}
+                        inFlightDOs={inFlightDOs}
+                        handleCmd={opts.handleCmd}
+                        refreshBot={opts.refreshBot} />
                 </div>
             );
         });
@@ -39,15 +48,15 @@ class DashboardBotsView extends React.Component {
     }
 
     render() {
-        let { authorized, authorizing, fetching, available, handleCmd } = this.props;
+        let { authorized, authorizing, fetching, bots, inFlightDOs, handleCmd, refreshBot } = this.props;
         let content;
 
         if (!authorized) {
             content = authorizing ? this._renderAuthorizing() : this._renderUnauthorized();
         } else if (fetching) {
             content = this._renderFetchingBots();
-        } else if (available) {
-            content = this._renderBots({ bots: available, handleCmd });
+        } else if (bots) {
+            content = this._renderBots({ bots, inFlightDOs, handleCmd, refreshBot });
         } else {
             content = (
                 <p>An error has occured.  We were unable to authorize and

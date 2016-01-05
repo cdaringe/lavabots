@@ -9,10 +9,7 @@ class DashboardBots extends React.Component {
 
     handleCmd(opts) {
         const { dispatch } = this.props;
-        dispatch(allActions.callCmd({
-            cmd: opts.cmd,
-            arg: opts.arg
-        }));
+        dispatch(allActions.callCmd(opts));
     }
 
     componentWillMount() {
@@ -30,10 +27,16 @@ class DashboardBots extends React.Component {
         dispatch(allActions.clearBots());
     }
 
+    refreshBot(bot) {
+        let { dispatch } = this.props;
+        dispatch(allActions.fetchState(bot));
+    }
+
     render() {
         return (
             <DashboardBotsView
                 handleCmd={this.handleCmd.bind(this)}
+                refreshBot={this.refreshBot.bind(this)}
                 {...this.props.bots}
             />
         );
